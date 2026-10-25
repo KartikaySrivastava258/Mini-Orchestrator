@@ -1,0 +1,30 @@
+# Environment and secrets (examples like .env.example are committed)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Go
+backend/bin/
+*.test
+*.out
+coverage.*
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+*.local
+
+# Logs and local state
+*.log
+etcd-data/
+tmp/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Mini Orchestrator console theme: light, calm, one accent colour.
+ * Green/amber/red only ever mean status. If it's coloured, it means something.
+ */
+@layer base {
+  :root {
+    --background: 220 20% 97%;      /* canvas  #F6F7F9 */
+    --foreground: 214 28% 15%;      /* ink     #1B2430 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 214 28% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 28% 15%;
+
+    --primary: 188 79% 27%;         /* steel teal #0E6C7A */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 213 20% 95%;
+    --secondary-foreground: 214 28% 15%;
+
+    --muted: 213 20% 95%;
+    --muted-foreground: 214 12% 41%;
+
+    --accent: 188 45% 94%;
+    --accent-foreground: 188 79% 22%;
+
+    --destructive: 4 64% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 145 63% 33%;
+    --success-foreground: 0 0% 100%;
+    --warning: 36 71% 42%;
+    --warning-foreground: 0 0% 100%;
+    --info: 224 55% 46%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 213 20% 89%;
+    --input: 213 18% 84%;
+    --ring: 188 79% 32%;
+    --radius: 0.375rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 214 20% 30%;
+    --sidebar-primary: 188 79% 27%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 188 45% 94%;
+    --sidebar-accent-foreground: 188 79% 22%;
+    --sidebar-border: 213 20% 89%;
+    --sidebar-ring: 188 79% 32%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-md border bg-card;
+  }
+  .ident {
+    @apply font-mono text-[0.8125rem];
+  }
+}

@@ -1,0 +1,30 @@
+# Local development dependencies only: a single-member etcd.
+# The control plane, node agents and console run on the host (see README).
+name: mini-orchestrator
+
+services:
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.17
+    command:
+      - /usr/local/bin/etcd
+      - --name=etcd0
+      - --data-dir=/etcd-data
+      - --listen-client-urls=http://0.0.0.0:2379
+      - --advertise-client-urls=http://127.0.0.1:2379
+      - --listen-peer-urls=http://0.0.0.0:2380
+      - --initial-advertise-peer-urls=http://127.0.0.1:2380
+      - --initial-cluster=etcd0=http://127.0.0.1:2380
+    ports:
+      # Bound to loopback: etcd has no authentication in this setup.
+      - "127.0.0.1:2379:2379"
+    volumes:
+      - etcd-data:/etcd-data
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/etcdctl", "--endpoints=http://127.0.0.1:2379", "endpoint", "health"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+
+volumes:
+  etcd-data:
